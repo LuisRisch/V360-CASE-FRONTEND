@@ -1,0 +1,17 @@
+.label{
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--light--black);
+}
+
+.input {
+  font-size: 0.6rem;
+  width: 100%;
+  padding: 0.5rem 0.833rem;
+  margin: 0.333rem 0;
+  display: inline-block;
+  border: 1px solid var(--border--color);
+  color: var(--light--black);
+  border-radius: 0.1667rem;
+  box-sizing: border-box;
+}

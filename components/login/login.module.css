@@ -1,0 +1,15 @@
+.container {
+  width: 100%;
+  position: absolute;
+  top: 2.083rem;
+  bottom: 0;
+  overflow: auto;
+  background-color: var(--light--blue);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.sized_box{
+  width: 0.5rem;
+}

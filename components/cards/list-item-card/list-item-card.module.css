@@ -1,0 +1,33 @@
+.card_container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  border-radius: 0.2083rem;
+  box-shadow: 0px 0px 0.2083rem 0px rgba(0, 0, 0, 0.2);
+  padding: 0.416666667rem;
+}
+
+.card_container > div {
+  margin: 0.5rem;
+}
+
+.card_header{
+  color: var(--light--black);
+  font-weight: 500;
+  padding-bottom: 1px;
+  border-bottom: 1px solid var(--light--black);
+  font-size: 0.9rem;
+}
+
+.card_body{
+  color: var(--light--black);
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+
+.card_footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

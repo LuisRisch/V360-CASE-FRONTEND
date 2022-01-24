@@ -1,0 +1,32 @@
+.button {
+  font-family: Roboto;
+  font-weight: 300;
+  background-color: var(--light--purple);
+  border-radius: 0.25rem;
+  border-width: 0;
+  box-shadow: 0 0.167rem 0.333rem 0 rgba(0, 0, 0, 0.2),
+    0 0.25rem 0.833rem 0 rgba(0, 0, 0, 0.19);
+  box-sizing: border-box;
+  color: var(--white);
+  cursor: pointer;
+  font-size: 0.8rem;
+  outline: none;
+  padding: 0.2rem 0.4rem;
+  width: 100%;
+}
+
+.button:hover{
+  background-color: var(--white);
+  color: var(--light--purple);
+}
+
+.button_content{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.sized_box{
+  width: 0.25rem;
+}

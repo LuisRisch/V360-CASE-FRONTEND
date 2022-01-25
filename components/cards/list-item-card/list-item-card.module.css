@@ -12,7 +12,7 @@
   margin: 0.5rem;
 }
 
-.card_header{
+.card_header {
   color: var(--light--black);
   font-weight: 500;
   padding-bottom: 1px;
@@ -20,14 +20,16 @@
   font-size: 0.9rem;
 }
 
-.card_body{
+.card_body {
   color: var(--light--black);
   font-weight: 300;
   font-size: 0.8rem;
 }
 
-.card_footer{
+.card_footer {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
+

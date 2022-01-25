@@ -8,6 +8,16 @@
   background-color: var(--light--blue);
 }
 
-.sized_box{
+.sized_box {
   width: 0.5rem;
+}
+
+.footer_change_page {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.footer_change_page > div {
+  margin: 0.25rem;
 }

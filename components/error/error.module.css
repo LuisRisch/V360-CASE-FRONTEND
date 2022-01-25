@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+  position: absolute;
+  top: 2.083rem;
+  bottom: 0;
+  overflow: auto;
+  background-color: var(--light--blue);
+  color: var(--light--black);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

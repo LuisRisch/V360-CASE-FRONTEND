@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styles from './signup.module.css';
 import SignupCard from '../cards/user-card/user-card.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,15 +7,25 @@ import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import Input from '../ui/text-input/text-input';
 import Button from '../ui/button/button';
-
+import UserContext from '../../context/user-context';
+import NotificationContext from '../../context/notification-context';
 
 function Signup() {
+  const userContext = useContext(UserContext);
+  const notificationContext = useContext(NotificationContext);
   const router = useRouter();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const resetFields = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+  }
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -36,7 +46,16 @@ function Signup() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    console.log(name, email, password, confirmPassword);
+    if (password === confirmPassword)
+      userContext.signUp({ name, email, password });
+    else
+      notificationContext.showNotification({
+        title: "Falha durante a criação de conta",
+        message: 'As senhas não conferem',
+        status: 'warning'
+      })
+
+    resetFields();
   }
 
   const goLogin = () => {
@@ -51,46 +70,49 @@ function Signup() {
     </>
   const CARD_BODY =
     <>
-      <Input
-        type="text"
-        htmlFor="name"
-        id="name"
-        name="name"
-        placeholder="Digite seu nome"
-        label="Nome"
-        value={name}
-        onChange={handleNameChange}
-      />
-      <Input
-        type="email"
-        htmlFor="email"
-        id="email"
-        name="email"
-        placeholder="Digite seu email"
-        label="Email"
-        value={email}
-        onChange={handleEmailChange}
-      />
-      <Input
-        type="password"
-        htmlFor="password"
-        id="password"
-        name="password"
-        placeholder="Digite sua senha"
-        label="Senha"
-        value={password}
-        onChange={handlePasswordChange}
-      />
-      <Input
-        type="password"
-        htmlFor="confirmPassword"
-        id="confirmPassword"
-        name="confirmPassword"
-        placeholder="Digite sua senha"
-        label="Confirme sua senha"
-        value={confirmPassword}
-        onChange={handleConfirmPasswordChange}
-      />
+      <form onSubmit={onSubmit}>
+        <Input
+          type="text"
+          htmlFor="name"
+          id="name"
+          name="name"
+          placeholder="Digite seu nome"
+          label="Nome"
+          value={name}
+          onChange={handleNameChange}
+        />
+        <Input
+          type="email"
+          htmlFor="email"
+          id="email"
+          name="email"
+          placeholder="Digite seu email"
+          label="Email"
+          value={email}
+          onChange={handleEmailChange}
+        />
+        <Input
+          type="password"
+          htmlFor="password"
+          id="password"
+          name="password"
+          placeholder="Digite sua senha"
+          label="Senha"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+        <Input
+          type="password"
+          htmlFor="confirmPassword"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Digite sua senha"
+          label="Confirme sua senha"
+          value={confirmPassword}
+          onChange={handleConfirmPasswordChange}
+        />
+        <input type="submit" style={{ display: 'none' }} />
+      </form>
     </>;
   const CARD_FOOTER =
     <>

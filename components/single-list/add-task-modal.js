@@ -10,6 +10,7 @@ import Button from '../ui/button/button';
 /* Required props
  * --openAddTaskModal; 
  * --handleOpenAddTaskModal; 
+ * --handleAddTask;
  * --listTitle. */
 
 function AddTaskModal(props) {
@@ -19,7 +20,14 @@ function AddTaskModal(props) {
 
   const OPEN_ADD_TASK_MODAL = props.openAddTaskModal || false;
   const HANDLE_OPEN_ADD_TASK_MODAL = props.handleOpenAddTaskModal || function () { };
+  const HANDLE_ADD_TASK = props.handleAddTask || function () { };
   const LIST_TITLE = props.listTitle || "";
+
+  const resetFields = () => {
+    setTaskTitle("");
+    setTaskDescription("");
+    setTaskPriority("");
+  }
 
   const handleChangeTaskTitle = (event) => {
     setTaskTitle(event.target.value);
@@ -31,6 +39,14 @@ function AddTaskModal(props) {
 
   const handleChangeTaskPriority = (event) => {
     setTaskPriority(event.target.value);
+  }
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    HANDLE_ADD_TASK(taskTitle, taskDescription, taskPriority);
+    HANDLE_OPEN_ADD_TASK_MODAL();
+    resetFields();
   }
 
   return (
@@ -51,43 +67,46 @@ function AddTaskModal(props) {
                 />
               </div>
             </div>
-            <div className={styles.modal_body}>
-              <div>
-                <Input
-                  label="Título"
-                  placeholder="Digite o título da tarefa"
-                  type="text"
-                  htmlFor="task-title"
-                  id="task-title"
-                  name="task-title"
-                  value={taskTitle}
-                  onChange={handleChangeTaskTitle}
-                />
-              </div>
-              <div>
-                <Input
-                  label="Descrição"
-                  placeholder="Digite a descrição da tarefa"
-                  type="text"
-                  htmlFor="task-description"
-                  id="task-description"
-                  name="task-description"
-                  value={taskDescription}
-                  onChange={handleChangeTaskDescription}
-                />
-              </div>
-              <div>
-                <Input
-                  label="Prioridade"
-                  placeholder="Baixa, Média ou Alta"
-                  type="text"
-                  htmlFor="task-priority"
-                  id="task-priority"
-                  name="task-priority"
-                  value={taskPriority}
-                  onChange={handleChangeTaskPriority}
-                />
-              </div>
+            <div>
+              <form className={styles.modal_body} onSubmit={onSubmit}>
+                <div>
+                  <Input
+                    label="Título"
+                    placeholder="Digite o título da tarefa"
+                    type="text"
+                    htmlFor="task-title"
+                    id="task-title"
+                    name="task-title"
+                    value={taskTitle}
+                    onChange={handleChangeTaskTitle}
+                  />
+                </div>
+                <div>
+                  <Input
+                    label="Descrição"
+                    placeholder="Digite a descrição da tarefa"
+                    type="text"
+                    htmlFor="task-description"
+                    id="task-description"
+                    name="task-description"
+                    value={taskDescription}
+                    onChange={handleChangeTaskDescription}
+                  />
+                </div>
+                <div>
+                  <Input
+                    label="Prioridade"
+                    placeholder="Baixa, Média ou Alta"
+                    type="text"
+                    htmlFor="task-priority"
+                    id="task-priority"
+                    name="task-priority"
+                    value={taskPriority}
+                    onChange={handleChangeTaskPriority}
+                  />
+                </div>
+                <input type="submit" style={{ display: "none" }} />
+              </form>
             </div>
             <div className={styles.modal_footer}>
               <div>
@@ -101,9 +120,7 @@ function AddTaskModal(props) {
                 <Button
                   label="Adicionar"
                   type="button"
-                  onClick={() => {
-                    console.log(taskTitle, taskDescription, taskPriority);
-                  }}
+                  onClick={onSubmit}
                 />
               </div>
             </div>

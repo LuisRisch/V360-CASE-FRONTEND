@@ -39,10 +39,7 @@
 .card_footer {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;  
+  justify-content: space-between;
+  align-items: center;  
   flex: 1;
-}
-
-.card_footer > div {
-  margin: 0.25rem;
 }

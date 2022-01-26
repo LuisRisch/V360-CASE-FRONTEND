@@ -23,6 +23,8 @@ function SingleList(props) {
 
   return <SingleListComponent
     list={data.list}
+    tasks={data.tasks}
+    totalItems={data.total}
   />
 }
 

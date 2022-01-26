@@ -35,7 +35,7 @@ function SingleList(props) {
   const handleChangePage = (direction) => {
     let page = currentPage;
 
-    if (direction === 'previous')
+    if (direction === 'previous' || (page === Math.ceil(totalItems / 2) && tasks.length === 1 && page !== 1))
       page--;
     else if (direction === 'next')
       page++;
@@ -236,7 +236,7 @@ function SingleList(props) {
           </div>
         }
         {
-          currentPage < Math.ceil(totalItems / 6) &&
+          currentPage < Math.ceil(totalItems / 2) &&
           <div>
             <Button
               label=""

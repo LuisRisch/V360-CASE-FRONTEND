@@ -31,7 +31,7 @@ function Home(props) {
   const handleChangePage = (direction) => {
     let page = currentPage;
 
-    if (direction === 'previous')
+    if (direction === 'previous' || (page === Math.ceil(totalItems / 2) && lists.length === 1 && page !== 1))
       page--;
     else if (direction === 'next')
       page++;
@@ -40,8 +40,7 @@ function Home(props) {
 
     api.get(`/lists?page=${page}`)
       .then((response) => {
-        if (response.statusText === 'OK')
-        {
+        if (response.statusText === 'OK') {
           setLists(response.data.lists);
           setTotalItems(response.data.total);
         }
@@ -197,7 +196,7 @@ function Home(props) {
           </div>
         }
         {
-          currentPage < Math.ceil(totalItems / 6) &&
+          currentPage < Math.ceil(totalItems / 2) &&
           <div>
             <Button
               label=""

@@ -7,6 +7,11 @@
   --light--black: #2b2b2b;
 
   --border--color: #ccc;
+
+  --color-success: #4CAF50;
+  --color-warning: #FF9800;
+  --color-danger: #F44336;
+  --color-info: #0047AB;
 }
 
 html,

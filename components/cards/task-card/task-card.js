@@ -12,14 +12,21 @@ import DeleteTaskModal from './delete-task-modal';
  * --description; 
  * --priority; 
  * --completed; 
- * --taskId. */
+ * --id;
+ * --handleDeleteTask; 
+ * --handleEditTask; 
+ * --handleCheckTask. */
 
 function TaskCard(props) {
   const TITLE = props.title || '';
   const DESCRIPTION = props.description || '';
   const PRIORITY = props.priority || '';
+  const ID = props.id || '';
+  const HANDLE_DELETE_TASK = props.handleDeleteTask || function () { };
+  const HANDLE_EDIT_TASK = props.handleEditTask || function () { };
+  const HANDLE_CHECK_TASK = props.handleCheckTask || function () { };
+  const COMPLETED = props.completed || false;
 
-  const [checked, setChecked] = useState(props.completed || false);
   const [openEditTaskModal, setOpenEditTaskModal] = useState(false);
   const [openDeleteTaskModal, setOpenDeleteTaskModal] = useState(false);
 
@@ -34,27 +41,31 @@ function TaskCard(props) {
   return (
     <div className={styles.card_container}>
       <DeleteTaskModal
+        taskId={ID}
         taskTitle={TITLE}
         openDeleteTaskModal={openDeleteTaskModal}
         handleOpenDeleteTaskModal={handleOpenDeleteTaskModal}
+        handleDeleteTask={HANDLE_DELETE_TASK}
       />
       <EditTaskModal
+        taskId={ID}
         taskTitle={TITLE}
         taskDescription={DESCRIPTION}
         taskPriority={PRIORITY}
         openEditTaskModal={openEditTaskModal}
         handleOpenEditTaskModal={handleOpenEditTaskModal}
+        handleEditTask={HANDLE_EDIT_TASK}
       />
       <div className={styles.task_status}>
         <div>
-          <input type="checkbox" checked={checked} onChange={() => { setChecked(!checked) }} />
+          <input type="checkbox" checked={COMPLETED} onChange={() => { HANDLE_CHECK_TASK(ID) }} />
         </div>
         <div>
           <Tag priority={PRIORITY} />
         </div>
       </div>
       <div className={styles.task_info}>
-        <div className={styles.task_info_title} style={checked ? { textDecoration: 'line-through' } : {}}>
+        <div className={styles.task_info_title} style={COMPLETED ? { textDecoration: 'line-through' } : {}}>
           {TITLE}
         </div>
         <div className={styles.task_info_description}>
@@ -62,13 +73,16 @@ function TaskCard(props) {
         </div>
       </div>
       <div className={styles.task_actions}>
-        <div>
-          <IconButton
-            color="var(--light--black)"
-            icon={faEdit}
-            onClick={handleOpenEditTaskModal}
-          />
-        </div>
+        {
+          !COMPLETED &&
+          <div>
+            <IconButton
+              color="var(--light--black)"
+              icon={faEdit}
+              onClick={handleOpenEditTaskModal}
+            />
+          </div>
+        }
         <div>
           <IconButton
             color="var(--light--black)"
